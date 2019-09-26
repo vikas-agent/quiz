@@ -1,23 +1,36 @@
 <template>
   <div>
     <b-jumbotron>
-      <template v-slot:header>Some Question?</template>
+      <template >
+        <h3>{{currentQuestion.question}}</h3>  
+      </template>
 
       <hr class="my-4" />
 
-      <p>
-       List of Answers
+      <p v-for="(answer, index) in answers" :key="index">
+        {{answer}}
       </p>
 
-      <b-button variant="primary" href="#">Submit</b-button>
-      <b-button variant="success" href="#">Next</b-button>
+      <b-button variant="success" href="#">Submit</b-button>
+      <b-button variant="primary" @click="next">Next</b-button>
     </b-jumbotron>
   </div>
 </template>
 
 <script>
 export default {
-  name: "QuestionBox"
+  name: "QuestionBox",
+  props: {
+    currentQuestion: Object,
+    next: Function
+  },
+  computed: {
+    answers() {
+      let answers = [...this.currentQuestion.incorrect_answers];
+      answers.push(this.currentQuestion.correct_answer);
+      return answers;
+    }
+  }
 };
 </script>
 
