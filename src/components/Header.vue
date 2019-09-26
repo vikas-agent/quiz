@@ -12,10 +12,7 @@
 <script>
 export default {
   name: "Header",
-  props: {
-    numCorrect: Number,
-    numTotal: Number
-  }
+  props: ["numCorrect", "numTotal"]
 };
 </script>
 
