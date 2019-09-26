@@ -56,9 +56,12 @@ export default {
     }
   },
   watch: {
-    currentQuestion() {
+    currentQuestion: {
+      immediate: true,
+      handler() {
       this.selectedAnswer = null;
       this.shuffleAnswers();
+      }
     }
   }
 };
