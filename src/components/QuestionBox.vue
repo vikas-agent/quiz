@@ -11,11 +11,7 @@
           v-for="(answer, index) in shuffledAnswers"
           :key="index"
           @click="selectAnswer(index)"
-          :class="[
-          !justAnswered && selectedAnswer === index ? 'selected' : 
-          justAnswered && correctAnswerIndex === index ? 'correct' : 
-          justAnswered && selectedAnswer === index && correctAnswerIndex !== index ? 'incorrect' : ''
-          ]"
+          :class="showAnswer(index)"
         >{{answer}}</b-list-group-item>
       </b-list-group>
 
@@ -85,6 +81,22 @@ export default {
       }
       this.justAnswered = true;
       this.increment(isCorrect);
+    },
+    showAnswer(index) {
+      let answerClass = "";
+
+      if (!this.justAnswered && this.selectedAnswer === index) {
+        answerClass = "selected";
+      } else if (this.justAnswered && this.correctAnswerIndex === index) {
+        answerClass = "correct";
+      } else if (
+        this.justAnswered &&
+        this.selectedAnswer === index &&
+        this.correctAnswerIndex !== index
+      ) {
+        answerClass = "incorrect";
+      }
+      return answerClass;
     }
   }
 };
